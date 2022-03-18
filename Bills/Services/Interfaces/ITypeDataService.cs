@@ -8,6 +8,7 @@ namespace Bills.Services.Interfaces
     {
 
         public List<TypeData> getAll();
+        public List<TypeData> getByCompanyId(int companyId);
         public int create(TypeView typeView);
 
         public bool Unique(string Name , int CompanyId);

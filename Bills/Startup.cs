@@ -50,6 +50,8 @@ namespace Bills
             #region Services Layout
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ITypeDataService, TypeDataService>();
+            services.AddScoped<IUnitService, UnitService>();
+            services.AddScoped<IItemService, ItemService>();
             #endregion
         }
 

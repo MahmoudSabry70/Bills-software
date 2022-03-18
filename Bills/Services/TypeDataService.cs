@@ -53,5 +53,10 @@ namespace Bills.Services
                 return true;
             }
         }
+
+        public List<TypeData> getByCompanyId(int companyId)
+        {
+          return _typeRepository.getByCompanyId(companyId);
+        }
     }
 }
