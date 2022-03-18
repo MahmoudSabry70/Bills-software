@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bills.Repository;
+using Bills.Services.Interfaces;
+using Bills.Services;
 
 namespace Bills
 {
@@ -32,14 +34,23 @@ namespace Bills
             options.UseSqlServer(Configuration.GetConnectionString("url")).UseLazyLoadingProxies());
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
-			
-			services.AddScoped<IBillItemRepository, BillItemRepository>();
+
+            #region reposatory Layout
+            services.AddScoped<IBillItemRepository, BillItemRepository>();
             services.AddScoped<IBillRepository, BillRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<ICompanyTypeRepository, CompanyTypeRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<ITypeRepository, TypeRepository>();
             services.AddScoped<IUnitRepositroy, UnitRepositroy>();
+            #endregion
+
+
+            #region Services Layout
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ITypeDataService, TypeDataService>();
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
