@@ -27,7 +27,6 @@ namespace Bills.Controllers
             _viewEngine = viewEngine;
         }
 
-
         public IActionResult Create()
         {
             ViewData["ClintId"] = new SelectList(context.Clients, "Id", "Name");
@@ -40,8 +39,6 @@ namespace Bills.Controllers
 
             return View(billView);
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -173,8 +170,7 @@ namespace Bills.Controllers
             {
                 #region add billItemview to listItemView in billView in session 
                 ajaxvalidation.status = true;
-                ajaxvalidation.BillView = billView;
-             
+                
                 billItemView.ItemCode = billView.ItemCode;
                 billItemView.SellingPrice = billView.SellingPrice;
                 billItemView.Quantity  = billView.Quantity;
