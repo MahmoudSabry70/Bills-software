@@ -52,6 +52,8 @@ namespace Bills
             services.AddScoped<ITypeDataService, TypeDataService>();
             services.AddScoped<IUnitService, UnitService>();
             services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IBillService, BillService>();
             #endregion
         }
 

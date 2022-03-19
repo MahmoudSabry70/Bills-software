@@ -24,7 +24,7 @@ namespace Bills.Controllers
 
      /*   [HttpPost]
         [ValidateAntiForgeryToken]*/
-        public async Task<IActionResult> Create(ReportViewModel viewModel)
+        public IActionResult Create(ReportViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {

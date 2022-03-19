@@ -22,6 +22,11 @@ namespace Bills.Services
            return _itemRepository.GetAll();
         }
 
+        public Item getById(int id)
+        {
+           return _itemRepository.GetById(id);
+        }
+
         public bool Unique(string Name)
         {
             Item item = _itemRepository.GetByName(Name);

@@ -3,16 +3,11 @@ using System.Collections.Generic;
 
 namespace Bills.Services.Interfaces
 {
-    public interface IItemService
+    public interface IClientService
     {
-
         public bool Unique(string Name);
 
-        public List<Item> getAll();
-        public int create(Item item);
-
-        public Item getById (int id);
-
-   
+        public List<Client> getAll();
+        public int create(Client client);
     }
 }
