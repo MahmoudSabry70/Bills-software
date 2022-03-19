@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,6 +7,7 @@ namespace Bills.Models.Entities
 {
     public class CompanyData
     {
+        [JsonIgnore]
         public int Id { get; set; }
 
         [Required(ErrorMessage = " COMPANY NAME is Required ") ]
@@ -14,6 +16,7 @@ namespace Bills.Models.Entities
 
         public string Notes { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<CompanyType> CompanyTypes { get; set; }
 
 

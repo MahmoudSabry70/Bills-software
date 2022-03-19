@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Bills.Repository;
 using Bills.Services.Interfaces;
 using Bills.Services;
+using Bills.Models.ModelView;
 
 namespace Bills
 {
@@ -67,6 +68,8 @@ namespace Bills
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IBillService, BillService>();
             #endregion
+            // services.AddScoped(typeof(ApiModel<>));
+            services.AddScoped<ApiModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
