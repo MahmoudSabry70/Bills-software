@@ -24,6 +24,7 @@ namespace Bills
         }
 
         public IConfiguration Configuration { get; }
+        string MyAllowSpecificOrigins = " ";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,6 +35,17 @@ namespace Bills
             options.UseSqlServer(Configuration.GetConnectionString("url")).UseLazyLoadingProxies());
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddSwaggerDocument();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                                builder =>
+                                {
+                                    builder.AllowAnyOrigin();
+                                    builder.AllowAnyMethod();
+                                    builder.AllowAnyHeader();
+                                });
+            });
 
             #region reposatory Layout
             services.AddScoped<IBillItemRepository, BillItemRepository>();
@@ -74,6 +86,9 @@ namespace Bills
 
             app.UseAuthorization();
             app.UseSession();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
