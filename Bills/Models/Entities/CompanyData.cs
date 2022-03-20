@@ -5,9 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Bills.Models.Entities
 {
+
     public class CompanyData
     {
-        [JsonIgnore]
+   
         public int Id { get; set; }
 
         [Required(ErrorMessage = " COMPANY NAME is Required ") ]

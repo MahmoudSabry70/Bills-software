@@ -86,12 +86,16 @@ namespace Bills
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
-            app.UseSession();
             app.UseOpenApi();
             app.UseSwaggerUi3();
             app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseAuthorization();
+            app.UseAuthorization();
+
+            app.UseSession();
+          
+        
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
