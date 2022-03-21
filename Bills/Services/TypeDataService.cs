@@ -44,7 +44,7 @@ namespace Bills.Services
             int typeDataID = 0;
             TypeData typeData = _typeRepository.GetByName(Name);
             if (typeData != null)
-            { typeDataID = typeData.Id; }
+            { typeDataID = typeData.Id;  }
             CompanyType companyType = _CompanyTypeRepository.getByIds(CompanyId, typeDataID);
             if (companyType != null)
             {

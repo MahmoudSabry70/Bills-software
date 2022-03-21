@@ -1,20 +1,19 @@
 ﻿using Bills.Models;
 using Bills.Models.ModelView;
+using Bills.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Bills.Controllers
 {
     public class ReportsController : Controller
     {
-        private readonly DatabaseContext context;
+        private readonly IReportService _reportService;
 
-        public ReportsController(DatabaseContext context)
+        public ReportsController(IReportService reportService)
         {
-            this.context = context;
+          _reportService = reportService;
         }
         public IActionResult Index()
         {
@@ -22,18 +21,18 @@ namespace Bills.Controllers
             return View();
         }
 
-     /*   [HttpPost]
-        [ValidateAntiForgeryToken]*/
+        [HttpPost]
         public IActionResult Create(ReportViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
             {
+                if (!ModelState.IsValid)
+                {
                 
-                return RedirectToAction(nameof(Index),viewModel);
-            }
-            var model = context.Bills.Include(b => b.client).Where(b => b.BillDate >= viewModel.FromDate && b.BillDate <= viewModel.ToDate).ToList();
+                    return RedirectToAction(nameof(Index),viewModel);
+                }
+            if (viewModel.ToDate==null) { viewModel.ToDate = System.DateTime.Now; }
+                var model = _reportService.GetByDate(viewModel.FromDate, (System.DateTime)viewModel.ToDate);
 
-            return PartialView(model);
-        }
+                return PartialView(model);
+            }
     }
 }
