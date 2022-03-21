@@ -63,6 +63,12 @@
                      <li class=" nav-item"><a asp-controller="Reports" asp-action="Index" ><i class="icon-puzzle"></i><span data-i18n="" class="menu-title">Sales Report
                      </span></a>
                      </li>
+                      <li class=" nav-item"><a asp-controller="ItemReport" asp-action="ItemsInventory" ><i class="icon-puzzle"></i><span data-i18n="" class="menu-title">Items Report
+                     </span></a>
+                     </li>
+                      <li class=" nav-item"><a asp-controller="ItemReport" asp-action="Index" ><i class="icon-puzzle"></i><span data-i18n="" class="menu-title">Items Report
+                     </span></a>
+                     </li>
                     
                     
                   </ul>
@@ -412,7 +418,7 @@
       <script src="../app-assets/js/customizer.js"></script>
       <script src="../app-assets/js/dashboard-ecommerce.js"></script>
       <script src="~/lib/jquery/dist/jquery.min.js"></script>
-      <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+      <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
       <script src="~/js/site.js" asp-append-version="true"></script>
       @await RenderSectionAsync("Scripts", required: false)
    </body>

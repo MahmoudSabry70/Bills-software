@@ -7,9 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Bills.Repository;
 using Bills.Services.Interfaces;
 using Bills.Services;
@@ -32,7 +29,7 @@ namespace Bills
         {
             services.AddControllersWithViews();
             services.AddSession(s => s.IdleTimeout = TimeSpan.FromDays(2));
-            services.AddDbContext<DatabaseContext>(options => 
+            services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("url")).UseLazyLoadingProxies());
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
@@ -67,6 +64,8 @@ namespace Bills
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IBillService, BillService>();
+            services.AddScoped<IReportService, ReportService>(); 
+                services.AddScoped<IBillItemService, BillItemService>();
             #endregion
             // services.AddScoped(typeof(ApiModel<>));
             services.AddScoped<ApiModel>();
@@ -94,8 +93,8 @@ namespace Bills
             app.UseAuthorization();
 
             app.UseSession();
-          
-        
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
