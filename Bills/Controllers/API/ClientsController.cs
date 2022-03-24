@@ -55,7 +55,7 @@ namespace Bills.Controllers.API
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+
        public IActionResult Client(Client client)
         {
             if (ModelState.IsValid)
