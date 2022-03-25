@@ -55,7 +55,6 @@ namespace Bills.Controllers.API
 
 
         [HttpPost]
-
        public IActionResult Client(Client client)
         {
             if (ModelState.IsValid)

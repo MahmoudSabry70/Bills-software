@@ -19,7 +19,10 @@ namespace Bills.Controllers
             _itemService = itemService;
         }
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View("searchItem" ,_itemService.getAll().Take(10).ToList());
@@ -34,8 +37,7 @@ namespace Bills.Controllers
         
       public IActionResult ItemDetails(int id=1)
         {
-            ViewData["itemData"] = _itemService.getById(id);
-            List < BillItem > itemDetais = _billItemService.MoreDetails(id);
+            ViewData["itemData"] = _itemService.getById(id); 
            return View("ItemDetails", _billItemService.MoreDetails(id));
         }
         public IActionResult ItemsInventory()
@@ -47,6 +49,17 @@ namespace Bills.Controllers
                 instock = x.QuantityRest
             }).ToList();
             return View("ItemsInventory", items);
+        }
+        [HttpGet]
+        public JsonResult PopulationChart()
+        {
+            var populationList = _itemService.getAll().Select(x => new ItemReportViewModel()
+            {
+                name = x.Name,
+                total = x.BalanceOfTheFirstDuration,
+                instock = x.QuantityRest
+            }).ToList();
+            return Json(populationList);
         }
     }
 }
