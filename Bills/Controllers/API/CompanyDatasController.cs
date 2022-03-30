@@ -49,9 +49,9 @@ namespace Bills.Controllers.API
 
 
         [HttpPost]
-        
+
         [ProducesResponseType(typeof(IEnumerable<ApiModel>), 201)]
-        public IActionResult Company( CompanyData companyData)
+        public IActionResult Company(CompanyData companyData)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +65,14 @@ namespace Bills.Controllers.API
             _apiModel.Message = "Validation Error";
             return BadRequest(_apiModel);
         }
-       
+
+        [HttpGet("{name}")]
+        public IActionResult uniqeName(string Name)
+        {
+            _apiModel.Success = true;
+            _apiModel.Data = !_companyService.Unique(Name);
+            return Ok(_apiModel);
+        }
+
     }
 }

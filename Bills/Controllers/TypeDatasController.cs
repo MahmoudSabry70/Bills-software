@@ -10,6 +10,7 @@ namespace Bills.Controllers
         private readonly ICompanyService _companyService;
         private readonly ITypeDataService _typeDataService;
 
+
         public TypeDatasController(ICompanyService companyService, ITypeDataService typeDataService)
         {
             _companyService = companyService;

@@ -45,7 +45,14 @@ namespace Bills.Controllers.API
             _apiModel.Data = null;
             return BadRequest(_apiModel);
         }
+        [HttpGet("{name}")]
+        public IActionResult uniqeName(string Name)
+        {
+            _apiModel.Success = true;
+            _apiModel.Data = !_unitService.Unique(Name);
+            return Ok(_apiModel);
+        }
 
-       
+
     }
 }

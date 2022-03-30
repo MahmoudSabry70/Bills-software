@@ -34,6 +34,8 @@ namespace Bills.Services
             CompanyType companyType = new CompanyType();
             companyType.CompanyDataId = typeView.CompanyId;
             companyType.TypeDataId = NewTypeData.Id;
+            OldtypeData.Notes=typeView.Notes;
+            _typeRepository.Update(OldtypeData.Id, OldtypeData);
           return  _CompanyTypeRepository.Add(companyType);
         }
 

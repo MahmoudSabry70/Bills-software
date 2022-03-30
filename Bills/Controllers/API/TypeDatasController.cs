@@ -10,13 +10,14 @@ namespace Bills.Controllers.API
     [ApiController]
     public class TypeDatasController : ControllerBase
     {
-    
+
         private readonly ITypeDataService _typeDataService;
+        private readonly ICompanyService _companyService;
         public readonly ApiModel _apiModel;
 
-        public TypeDatasController(ITypeDataService typeDataService, ApiModel apiModel)
+        public TypeDatasController(ICompanyService companyService,ITypeDataService typeDataService, ApiModel apiModel)
         {
-            
+            _companyService = companyService;
             _typeDataService = typeDataService;
             _apiModel = apiModel;
         }
@@ -74,7 +75,6 @@ namespace Bills.Controllers.API
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(IEnumerable<ApiModel>), 201)]
         public IActionResult Type(TypeView typeView)
         {
@@ -82,9 +82,9 @@ namespace Bills.Controllers.API
             {
                 if (typeView.CompanyId == 0)
                 {
-                    _apiModel.Success=false;
+                    _apiModel.Success = false;
                     _apiModel.Message = "COMPANY NAME is Required";
-                    _apiModel.Data=null;
+                    _apiModel.Data = null;
                     return BadRequest(_apiModel);
                 }
                 else
@@ -92,7 +92,7 @@ namespace Bills.Controllers.API
 
                     _apiModel.Success = true;
                     _apiModel.Message = " ";
-                    _apiModel.Data = _typeDataService.create(typeView); 
+                    _apiModel.Data = _typeDataService.create(typeView);
                     return Ok(_apiModel);
                 }
             }
@@ -102,7 +102,23 @@ namespace Bills.Controllers.API
             return BadRequest(_apiModel);
         }
 
-       
+        [HttpGet("{name}/{companyId}")]
+        public IActionResult uniqeName(string name, int companyId)
+        {
+            CompanyData companyData = _companyService.getById(companyId);
+            if (companyData == null)
+            { 
+                _apiModel.Success = false;
+                _apiModel.Message = "company not found ";
+                return BadRequest(_apiModel);
+            
+            }
+            _apiModel.Success = true;
+            _apiModel.Data = !_typeDataService.Unique(name, companyId);
+            return Ok(_apiModel);
+        }
+
+
 
 
 
