@@ -1,5 +1,4 @@
-﻿using Bills.Models.Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -78,7 +77,7 @@ namespace Bills.Models.ModelView
 
         public string Unit { get; set; }
 
-        public int Discount { get; set; }
+        
 
         #endregion
 

@@ -67,6 +67,53 @@ namespace Bills.Services
             #endregion
         }
 
+        public int create(BillView billViewModel)
+        {
+            #region add bill 
+
+            #region create bill 
+            Bill bill = new Bill();
+            bill.BillDate = billViewModel.BillDate;
+            bill.Id = billViewModel.BillId;
+            bill.ClintId = billViewModel.ClintId;
+
+            bill.BillsTotal = (float)billViewModel.BillsTotal;
+            bill.PercentageDiscount = billViewModel.PercentageDiscount;
+            bill.ValueDiscount = billViewModel.ValueDiscount;
+            bill.PaidUp = billViewModel.PaidUp;
+            bill.TheRest = billViewModel.TheRest;
+            bill.TheNet = billViewModel.TheNet;
+            #endregion
+
+            #region add Items to this bill 
+            foreach (BillItemView itemView in billViewModel.listItemView)
+            {
+                BillItem billItem = new BillItem();
+                billItem.billId = bill.Id;
+                billItem.ItemId = itemView.ItemCode;
+                billItem.SellingPrice = itemView.SellingPrice;
+                billItem.Quantity = itemView.Quantity;
+                billItem.TotalBalance = itemView.TotalBalance;
+                bill.BillItems.Add(billItem);
+            }
+            #endregion
+
+            #region update Quantity Rest for items
+            foreach (var newQuantity in billViewModel.ItemsQuantity)
+            {
+                Item item = _itemRepository.GetById(newQuantity.Key);
+                item.QuantityRest = newQuantity.Value;
+                _itemRepository.Update(item.Id, item);
+            }
+            #endregion
+
+
+            return _billRepository.Add(bill);
+
+            #endregion
+        }
+
+
         public BillItemView transferToBillItemView(BillView billView)
         {
             BillItemView billItemView = new BillItemView();
@@ -80,5 +127,7 @@ namespace Bills.Services
 
             return billItemView;
         }
+
+      
     }
 }

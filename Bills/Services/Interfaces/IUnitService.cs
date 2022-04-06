@@ -9,5 +9,6 @@ namespace Bills.Services.Interfaces
 
         public List<Unit> getAll();
         public int create(Unit unit);
+        public Unit getById(int id);
     }
 }

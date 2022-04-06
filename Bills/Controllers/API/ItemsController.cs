@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Bills.Models.Entities;
 using Bills.Services.Interfaces;
 using Bills.Models.ModelView;
+using System;
 
 namespace Bills.Controllers.API
 {
@@ -66,6 +67,7 @@ namespace Bills.Controllers.API
                 {
                     item.Id = 0;
                     item.QuantityRest = item.BalanceOfTheFirstDuration;
+                    item.EntryDate = DateTime.Now;
                     _apiModel.Success = true;
                     _apiModel.Data = _itemService.create(item);
                     return Ok(_apiModel);
@@ -78,7 +80,13 @@ namespace Bills.Controllers.API
             _apiModel.Data = null;
             return BadRequest(_apiModel);
         }
-
+        [HttpGet("{name}")]
+        public IActionResult uniqeName(string Name)
+        {
+            _apiModel.Success = true;
+            _apiModel.Data = !_itemService.Unique(Name);
+            return Ok(_apiModel);
+        }
 
 
 

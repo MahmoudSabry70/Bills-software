@@ -10,5 +10,6 @@ namespace Bills.Services.Interfaces
         public int create(BillView billViewModel, BillView billViewSession);
 
         public BillItemView transferToBillItemView(BillView billView);
+        public int create(BillView billViewModel);
     }
 }

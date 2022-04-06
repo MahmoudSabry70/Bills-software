@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Bills.Models.Entities;
 using Bills.Services.Interfaces;
 using Bills.Models.ModelView;
@@ -68,7 +67,7 @@ namespace Bills.Controllers.API
                 }
                 else
                 { 
-                    client.Id = 1 + _clientService.getAll().Count();
+                    client.Id = 1 + _clientService.getAll().Count;
                     _apiModel.Data = _clientService.create(client);
                     _apiModel.Success = true;
                     _apiModel.Message = "  Client added successfully";
@@ -80,7 +79,15 @@ namespace Bills.Controllers.API
             _apiModel.Data = null;
             return BadRequest(_apiModel);
         }
+        [HttpGet("{name}")]
+        public IActionResult uniqeName(string Name)
+        {
+            _apiModel.Success = true;
+            _apiModel.Data = !_clientService.Unique(Name);
+            return Ok(_apiModel);
+        }
 
-      
+
+
     }
 }

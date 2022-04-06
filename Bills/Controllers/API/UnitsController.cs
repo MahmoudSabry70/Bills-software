@@ -45,6 +45,26 @@ namespace Bills.Controllers.API
             _apiModel.Data = null;
             return BadRequest(_apiModel);
         }
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(IEnumerable<ApiModel>), 200)]
+        public IActionResult Unit(int id)
+        {
+            Unit unit = _unitService.getById(id);
+            if (unit == null)
+            {
+                _apiModel.Data = null;
+                _apiModel.Success = false;
+                _apiModel.Message = "this Id not found ";
+                return NotFound(_apiModel);
+            }
+            else
+            {
+                _apiModel.Data = unit;
+                _apiModel.Success = true;
+                return Ok(_apiModel);
+            }
+        }
+
         [HttpGet("{name}")]
         public IActionResult uniqeName(string Name)
         {

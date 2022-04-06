@@ -18,7 +18,7 @@ namespace Bills.Models.ModelView
 
         public string Unit { get; set; }
 
-        public int Discount { get; set; }
+   
 
  
 

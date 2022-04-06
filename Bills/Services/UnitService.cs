@@ -23,6 +23,11 @@ namespace Bills.Services
            return _unitRepositroy.GetAll();
         }
 
+        public Unit getById(int id)
+        {
+           return _unitRepositroy.GetById(id);
+        }
+
         public bool Unique(string Name)
         {
             Unit unit = _unitRepositroy.GetByName(Name);
